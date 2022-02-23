@@ -5,6 +5,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-decoration: none;
 }
 
 body {
@@ -14,4 +15,51 @@ body {
     color:#f6f6f6;
     margin-bottom: 20px;
     font-family: 'Ubuntu', 'sans-serif';
+}
+
+.max-width {
+    max-width: 1300px;
+    padding: 0 10px;
+    margin: auto;
+}
+
+.navbar .logo a{
+    color: #547ec7;
+    font-size: 35px;
+    font-weight: 500;
+}
+.navbar {
+    position: fixed;
+    width: 100%;
+    z-index: 999;
+    padding: 20px 0;
+    font-family: 'Ubuntu', 'san-serif';
+    background-color: #121721;
+    border-bottom: solid #1b202a 1px;
+}
+
+.navbar .max-width {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar .menu li{
+    list-style: none;
+    display: inline-block;
+}
+
+.navbar .menu li a {
+    display: block;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 400;
+    margin-left: 25px;
+}
+
+.menu-btn {
+    color: #fff;
+    font-size: 23px;
+    cursor: pointer;
+    display: none;
 }
