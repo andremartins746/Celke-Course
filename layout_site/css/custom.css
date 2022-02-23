@@ -1,0 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #060f16;
+}
+.text-test {
+    color:#f6f6f6;
+    margin-bottom: 20px;
+}
