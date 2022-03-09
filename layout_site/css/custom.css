@@ -550,6 +550,32 @@ footer span a:hover{
     transition: all 0.3 ease;
 }
 
-.contact .right form {
-    
+.contact .right form .button-area button:hover {
+    color: #b02ab7;
+    background: none;
+
+}
+
+@media(max-width: 947px){
+    .contact .contact-content .column {
+        width: 100%;
+        margin-bottom: 35px;
+    }
+}
+
+@media(max-width: 500px){
+    .contact .title {
+        margin-top: 50px;
+    }
+
+    .contact .right form .fields {
+        flex-direction: column;
+
+    }
+
+    .contact .right form .name, 
+    .contact .right form .name .email{
+        margin: 0;
+    }
+
 }
