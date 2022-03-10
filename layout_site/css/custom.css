@@ -7,9 +7,14 @@
     box-sizing: border-box;
     text-decoration: none;
 }
- 
+html, body{
+    height: 100%;
+}
+
 body {
     background-color: #060f16;
+    display: flex;
+    flex-direction: column;
 }
 .text-test {
     color:#f6f6f6;
@@ -327,6 +332,8 @@ footer {
     color: white;
     text-align: center;
     font-family: 'poppins', 'san-serif';
+    margin-top: auto;
+    
 }
 
 footer span a{
