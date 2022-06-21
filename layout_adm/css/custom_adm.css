@@ -36,15 +36,58 @@ body {
   align-items: center;
   background-color: var(--fourth-bg-color);
   position: sticky;
-  box-shadow: 0px 1px 4px 1px rgb(0,0,0,0.12);
+  box-shadow: 0px 1px 4px 1px rgb(0, 0, 0, 0.12);
   padding: 5px 15px;
   font-size: 17px;
   top: 0;
   z-index: 1;
 }
 
-.navbar .navbar-content{
-    display: flex;
-    align-items: center;
-    
+.navbar .navbar-content {
+  display: flex;
+  align-items: center;
+}
+
+.navbar .bars,
+.notification {
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.logo {
+  width: 50px;
+}
+
+.notification, .avatar{
+  cursor: pointer;
+  position: relative;
+}
+
+.notification .number {
+  position: absolute;
+  font-size: 13px;
+  font-weight: bold;
+  background-color: var(--site-color);
+  width: 20px;
+  color: var(--second-color);
+  height: 20px;
+  border-radius: 50%;
+  right: -10px;
+  top: -10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar img {
+  width:40px;
+  height:40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+
+/* inicio do conteudo */
+.content {
+display: flex;
 }
