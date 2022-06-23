@@ -105,6 +105,7 @@ display: flex;
   display: block;
 }
 
+
 .dropdown-content {
   max-height: 400px;
   overflow-y: auto;
