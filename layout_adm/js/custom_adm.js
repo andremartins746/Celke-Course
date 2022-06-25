@@ -13,10 +13,6 @@ function dropMenu(selector){
   })
 }
 
-
-
-
-
 // avatar.addEventListener("click", () => {
 //     console.log('foi')
 //   let dropdown_menu = document.querySelector(".dropdown-menu");
