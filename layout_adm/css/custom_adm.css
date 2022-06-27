@@ -168,3 +168,15 @@ display: flex;
 .content {
   display: flex;
 }
+
+/* inicio Sidebar */
+
+.content .sidebar {
+  color: var(--main-color);
+  height: calc(100vh - 60px);
+  /* width: 60px; */
+  width: 250px;
+
+  background-color: var(--main-bg-color);
+  position: absolute;
+}
