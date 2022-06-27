@@ -170,13 +170,31 @@ display: flex;
 }
 
 /* inicio Sidebar */
-
 .content .sidebar {
   color: var(--main-color);
   height: calc(100vh - 60px);
   /* width: 60px; */
   width: 250px;
-
+  
   background-color: var(--main-bg-color);
-  position: absolute;
+  position: sticky;
+  box-shadow: 0px 1px 4px 1px rgba(0,0,0, 0.12);
+  top: 60;
+  overflow:auto ;
+  transition: 0.3 width ease-in-out;
+  flex: 0;
+
+  /* display: flex;
+  flex-direction: column; */
+  
+}
+.content .sidebar a {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: var(--main-color);
+  text-decoration: none;
+}
+
+.content .sidebar a i {
+  padding-right: 9px;
 }
