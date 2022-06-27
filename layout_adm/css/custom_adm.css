@@ -184,8 +184,8 @@ display: flex;
   transition: 0.3 width ease-in-out;
   flex: 0;
 
-  /* display: flex;
-  flex-direction: column; */
+  display: flex;
+  flex-direction: column;
   
 }
 .content .sidebar a {
