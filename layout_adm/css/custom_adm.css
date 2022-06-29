@@ -184,11 +184,9 @@ display: flex;
   transition: 0.3 width ease-in-out;
   flex: 0;
 
-  display: flex;
-  flex-direction: column;
-  
+
 }
-.content .sidebar a {
+/* .content .sidebar a {
   display: block;
   padding: 0.75rem 1rem;
   color: var(--main-color);
@@ -197,4 +195,4 @@ display: flex;
 
 .content .sidebar a i {
   padding-right: 9px;
-}
+} */
