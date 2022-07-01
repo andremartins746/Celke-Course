@@ -173,8 +173,8 @@ display: flex;
 .content .sidebar {
   color: var(--main-color);
   height: calc(100vh - 60px);
-  /* width: 60px; */
-  width: 250px;
+  width: 60px;
+  /* width: 250px; */
   
   background-color: var(--main-bg-color);
   position: sticky;
@@ -183,4 +183,15 @@ display: flex;
   overflow:auto ;
   transition: 0.3 width ease-in-out;
   flex-shrink: 0;
+}
+
+@media(max-width: 720px){
+  .content .sidebar {
+    width: 60px;
+  }
+}
+
+.content .sidebar:hover,
+.content .sidebar.active {
+  width: 250px;
 }
