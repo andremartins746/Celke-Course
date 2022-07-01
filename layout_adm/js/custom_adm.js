@@ -23,4 +23,4 @@ function dropMenu(selector){
 let sidebar = document.querySelector(".sidebar"),
   bars = document.querySelector(".bars")
 
-window.matchMedia("(max-width: 768px)").matches ? sidebar.classList.remove("active") : sidebar.classList.add("active")
+window.matchMedia("(max-width : 768px)").matches ? sidebar.classList.remove("active") : sidebar.classList.add("active")
