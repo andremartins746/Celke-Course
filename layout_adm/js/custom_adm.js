@@ -20,7 +20,11 @@ function dropMenu(selector){
 // });
 
 // side bar
-let sidebar = document.querySelector(".sidebar"),
-  bars = document.querySelector(".bars")
+let sidebar = document.querySelector(".sidebar")
+let  bars = document.querySelector(".bars")
 
 window.matchMedia("(max-width : 768px)").matches ? sidebar.classList.remove("active") : sidebar.classList.add("active")
+
+bars.addEventListener("click", () => {
+  sidebar.classList.contains("active") ? sidebar.classList.remove("active") : sidebar.classList.add("active")
+})
