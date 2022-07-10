@@ -31,9 +31,12 @@ bars.addEventListener("click", () => {
 
 // botão do botão ação 
 function actionDropdown(id) {
+// minha solução
   // let dropdownActionItem = document.querySelector(".dropdown-action-item")
   // dropdownActionItem.classList.contains("show-dropdown-action")? dropdownActionItem.classList.remove("show-dropdown-action") : dropdownActionItem.classList.add("show-dropdown-action")
+  
   closeDropdownAction()
+  // solução do celke
   document.getElementById("actionDropdown" + id).classList.toggle("show-dropdown-action")
 }
 
@@ -48,7 +51,7 @@ window.onclick = function(event) {
 function closeDropdownAction () {
   var dropdowns = document.getElementsByClassName("dropdown-action-item")
   var i;
-  for(i= 0;i< dropdowns.length ; i++){
+  for(i= 0; i< dropdowns.length; i++){
     var openDropdown = dropdowns[i]
     if(openDropdown.classList.contains("show-dropdown-action")){
       openDropdown.classList.remove("show-dropdown-action")
