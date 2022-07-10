@@ -33,13 +33,27 @@ bars.addEventListener("click", () => {
 function actionDropdown(id) {
   // let dropdownActionItem = document.querySelector(".dropdown-action-item")
   // dropdownActionItem.classList.contains("show-dropdown-action")? dropdownActionItem.classList.remove("show-dropdown-action") : dropdownActionItem.classList.add("show-dropdown-action")
+  closeDropdownAction()
   document.getElementById("actionDropdown" + id).classList.toggle("show-dropdown-action")
 }
 
 // fechando a pagina
 window.onclick = function(event) {
   if(!event.target.matches(".dropdown-btn-action")){
-    document.getElementById("actionDropdown").classList.remove("show-dropdown-action")
+    // document.getElementById("actionDropdown").classList.remove("show-dropdown-action")
+    closeDropdownAction()
+  }
+}
+
+function closeDropdownAction () {
+  var dropdowns = document.getElementsByClassName("dropdown-action-item")
+  var i;
+  for(i= 0;i< dropdowns.length ; i++){
+    var openDropdown = dropdowns[i]
+    if(openDropdown.classList.contains("show-dropdown-action")){
+      openDropdown.classList.remove("show-dropdown-action")
+    }
+
   }
 }
   
