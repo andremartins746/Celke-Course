@@ -28,3 +28,18 @@ window.matchMedia("(max-width : 768px)").matches ? sidebar.classList.remove("act
 bars.addEventListener("click", () => {
   sidebar.classList.contains("active") ? sidebar.classList.remove("active") : sidebar.classList.add("active")
 })
+
+// botão do botão ação 
+function actionDropdown(id) {
+  // let dropdownActionItem = document.querySelector(".dropdown-action-item")
+  // dropdownActionItem.classList.contains("show-dropdown-action")? dropdownActionItem.classList.remove("show-dropdown-action") : dropdownActionItem.classList.add("show-dropdown-action")
+  document.getElementById("actionDropdown" + id).classList.toggle("show-dropdown-action")
+}
+
+// fechando a pagina
+window.onclick = function(event) {
+  if(!event.target.matches(".dropdown-btn-action")){
+    document.getElementById("actionDropdown").classList.remove("show-dropdown-action")
+  }
+}
+  
