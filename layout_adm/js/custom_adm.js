@@ -51,7 +51,7 @@ window.onclick = function(event) {
 function closeDropdownAction () {
   var dropdowns = document.getElementsByClassName("dropdown-action-item")
   var i;
-  for(i= 0; i< dropdowns.length; i++){
+  for(i= 0; i < dropdowns.length; i++){
     var openDropdown = dropdowns[i]
     if(openDropdown.classList.contains("show-dropdown-action")){
       openDropdown.classList.remove("show-dropdown-action")
