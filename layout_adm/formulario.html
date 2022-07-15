@@ -83,11 +83,11 @@
     <div class="content">
         <!-- :inicio da sideBar: -->
         <div class="sidebar">
-            <a href="index.html" class="sidebar-nav active"><i class="icon fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
+            <a href="index.html" class="sidebar-nav "><i class="icon fa-solid fa-gauge-high"></i><span>Dashboard</span></a>
 
-            <a href="listar.html" class="sidebar-nav"><i class="icon fa-solid fa-users"></i><span>Listar</span></a>
+            <a href="listar.html" class="sidebar-nav "><i class="icon fa-solid fa-users"></i><span>Listar</span></a>
             
-            <a href="formulario.html" class="sidebar-nav "><i class="icon fa-solid fa-edit"></i><span>formulário</span></a>
+            <a href="formulario.html" class="sidebar-nav active"><i class="icon fa-solid fa-edit"></i><span>formulário</span></a>
 
             <a href="login.html" class="sidebar-nav"><i class="icon fa-solid fa-arrow-right-from-bracket"></i>  <span>Sair</span></a>
         </div>
@@ -95,28 +95,57 @@
         <div class="wrapper">
             <!-- conteudo adm -->
             <div class="row">
-                <div class="box box-first">
-                    <span  class="fa-solid fa-users"></span>
-                    <span>397</span>
-                    <span>Usuarios</span>
+                <div class="top-content-adm">
+                    <span class="title-content">Cadastrar</span>
+                    <div class="top-content-adm-right">
+                        <button type="button" class="btn-info">Listar</button>
+                    </div>
                 </div>
+               
+                <div class="content-adm">
+                    <form action="" class="form-adm">
+                        <div class="row-input">
+                            <div class="column">
+                                <label class="title-input">Nome</label>
+                                <input class="input-adm" type="text" id="name" name="name" placeholder="Nome Completo">
+                            </div>
 
-                <div class="box box-second">
-                    <span class="fa-solid fa-truck-ramp-box"></span>
-                    <span>43</span>
-                    <span>Entregas</span>
-                </div>
+                            <div class="column">
+                                <label class="title-input">E-mail</label>
+                                <input class="input-adm" type="email" id="email" name="email" placeholder="Melhor e-mail">
+                            </div>
 
-                <div class="box box-third">
-                    <span class="fa-solid fa-circle-check"></span>
-                    <span>12</span>
-                    <span>completas</span>
-                </div>
+                        </div>
+                        <div class="row-input">
+                            <div class="column">
+                                <label class="title-input">Campo 3</label>
+                                <input class="input-adm" type="text" id="campo_3" name="campo_3" placeholder="Campo 3">
+                            </div>
 
-                <div class="box box-fourth">
-                    <span class="fa-solid fa-circle-exclamation"></span>
-                    <span>3</span>
-                    <span>alertas</span>
+                            <div class="column">
+
+                                <label class="title-input">campo 4</label>
+                                <input class="input-adm" type="email" id="campo_4" name="campo_4" placeholder="Campo 4">
+                            </div>
+
+                        </div>
+
+                        <div class="row-input">
+                            <div class="column">
+                                <label class="title-input">Campo 5</label>
+                                <input class="input-adm" type="text" id="campo_5" name="campo_5" placeholder="Campo 5">
+                            </div>
+
+                        </div>
+
+                        <div class="row-input">
+                            <div class="column">
+                                <label class="title-input">Descrição</label>
+                                <textarea class="input-adm" id="descricao" placeholder="Descrição" rows="3"></textarea>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-success">Cadastrar</button>
+                    </form>
                 </div>
 
             </div>
