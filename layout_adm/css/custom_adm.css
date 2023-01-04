@@ -168,7 +168,6 @@ body {
 }
 
 /* Inicio Sidebar */
-
 .content .sidebar {
   color: var(--main-color);
   height: calc(100vh - 60px);
