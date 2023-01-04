@@ -27,4 +27,18 @@ app.post('/contato', (req, res) => {
     })
 })
 
+app.put("/contato/:id", (req, res) => {
+    const {id} = req.params
+    const {nome, email, _id} = req.body
+
+
+   return res.json({
+        _id,
+        id,
+        nome,
+        email
+
+    })
+})
+
 app.listen(3000, () => console.log('rodando '))
