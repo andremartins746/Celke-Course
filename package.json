@@ -1,5 +1,23 @@
 {
   "dependencies": {
     "express": "^4.18.2"
-  }
+  },
+  "name": "celke",
+  "description": "Curso do Celke, sobre React-js, Node-js e React-native...",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andremartins746/Celke-Course.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andremartins746/Celke-Course/issues"
+  },
+  "homepage": "https://github.com/andremartins746/Celke-Course#readme"
 }
