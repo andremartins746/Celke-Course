@@ -41,8 +41,12 @@ app.put("/contato/:id", (req, res) => {
     })
 })
 
-app.delete("", (req, res) => {
-    
+app.delete("/contato/:id", (req, res) => {
+        const {id} = req.params
+
+        return res.json({
+            id
+        })
 })
 
 app.listen(3000, () => console.log('rodando '))
