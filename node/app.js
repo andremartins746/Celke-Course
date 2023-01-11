@@ -3,7 +3,19 @@ const app = express()
 
 app.use(express.json())
 
+// app.use('/', (req,res, next )=> {
+
+//     console.log('Acessou o middleware')
+//     next()
+// })
+
+function ValContato (req, res, next) {
+    !req.body.email ?  res.json({erro: true, mensagem:"Necessário enviar o email"}) : next()
+}
+
 app.get('/', (req, res) => {
+
+    console.log("Acessou a rota Listar")
     res.send("Salve mundo")
 })
 
@@ -19,7 +31,7 @@ app.get('/contatos/:id', (req, res) => {
     })
 })
 
-app.post('/contato', (req, res) => {
+app.post('/contato', ValContato ,(req, res) => {
     const {nome, email} = req.body
     return res.json({
         nome,
