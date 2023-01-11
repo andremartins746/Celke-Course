@@ -38,5 +38,14 @@ app.put('/usuario', (req, res) => {
     })
 })
 
+app.delete('/usuario/:id', (req, res) => {
+    const {id} = req.params
+    res.json({
+        erro: false,
+        id,
+       
+    })
+})
+
 
 app.listen(8080, () => console.log("rodando"))
