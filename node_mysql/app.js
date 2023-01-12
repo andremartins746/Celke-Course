@@ -40,6 +40,7 @@ app.post('/user', async (req, res) => {
 
     })
 })
+
 app.put('/usuario', (req, res) => {
     const {id ,nome, email} = req.body
     res.json({
