@@ -23,12 +23,11 @@ app.get('/usuario/:id', (req, res) => {
     })
 })
 
-app.post('/usuario/', (req, res) => {
-    const {nome, email} = req.body
+app.post('/user', (req, res) => {
+    const {name, email} = req.body
     res.json({
         erro: false,
-        nome,
-        email
+        
     })
 })
 app.put('/usuario', (req, res) => {
