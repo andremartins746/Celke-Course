@@ -1,5 +1,6 @@
 const express = require("express")
-const db = require("./models/db")
+const Usuario = require("./models/Usuario")
+
 const app = express()
 app.use(express.json())
 
