@@ -23,11 +23,21 @@ app.get('/usuario/:id', (req, res) => {
     })
 })
 
-app.post('/user', (req, res) => {
+app.post('/user', async (req, res) => {
     const {name, email} = req.body
+    await Usuario.create({
+        name:name,
+        email: email
+    })
+    .then(() => {
+        console.log('cadastrou')
+    })
+    .catch(() => {
+        console.log("nao cadastrou")
+    })
     res.json({
         erro: false,
-        
+
     })
 })
 app.put('/usuario', (req, res) => {
