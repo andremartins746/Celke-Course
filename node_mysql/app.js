@@ -59,5 +59,4 @@ app.delete('/usuario/:id', (req, res) => {
     })
 })
 
-
 app.listen(8080, () => console.log("rodando"))
