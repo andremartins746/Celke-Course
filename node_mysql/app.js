@@ -1,6 +1,8 @@
 const express = require("express")
+const db = require("./models/db")
 const app = express()
 app.use(express.json())
+
 
 app.get('/usuarios', (req, res) => {
 res.json({
