@@ -25,14 +25,24 @@ app.get('/users', async (req, res) => {
 
 })
 
-app.get('/usuario/:id', (req, res) => {
+app.get('/user/:id', async(req, res) => {
     const {id} = req.params
-    res.json({
-        erro: false,
-        id,
-        nome: "André",
-        email: "Andremartfins746@gmail.com"
+    // await Usuario.findAll({where:{id: parseInt(id)}})
+    await Usuario
+    .then((user) => {
+        res.json({
+            erro: false,
+            user
+        })
     })
+    .catch(() => {
+        return res.status(400).json({
+            erro:true,
+            mensagem:"Erro: Nenhum Usuario encontrado"
+           })
+    })
+
+   
 })
 
 app.post('/user', async (req, res) => {
