@@ -5,21 +5,27 @@ const app = express()
 app.use(express.json())
 
 
-app.get('/usuarios', (req, res) => {
+app.get('/usuarios', async (req, res) => {
+
+    const data =  await Usuario.findAll()
+
 res.json({
     erro: false,
-    nome: "André",
-    email: "Andremartfins746@gmail.com"
+    data
 })
 })
 
-app.get('/usuario/:id', (req, res) => {
+app.get('/usuario/:id', async (req, res) => {
     const {id} = req.params
+   
+    
+    const data =  await Usuario.findAll({where:{
+        id:  parseInt(id)
+    }})
+
     res.json({
         erro: false,
-        id,
-        nome: "André",
-        email: "Andremartfins746@gmail.com"
+       data
     })
 })
 
