@@ -5,27 +5,33 @@ const app = express()
 app.use(express.json())
 
 
-app.get('/usuarios', async (req, res) => {
+app.get('/users', async (req, res) => {
+    await Usuario.findAll({
+        order:[['id', 'DESC']],    //DESC decrecente - ASC crecente - colocando em ordem decrecente (do ultimo ate o primeiro)
+        attributes: ['id', 'name', 'email']  // escolhendo quais colunas retornar do BD
+    })
+        .then((users) => {
+            res.json({
+                erro: false,
+                users
+            })
+        })
+        .catch(() => {
+           return res.status(400).json({
+            erro:true,
+            mensagem:"Erro: Nenhum Usuario encontrado"
+           })
+        })
 
-    const data =  await Usuario.findAll()
-
-res.json({
-    erro: false,
-    data
 })
-})
 
-app.get('/usuario/:id', async (req, res) => {
+app.get('/usuario/:id', (req, res) => {
     const {id} = req.params
-   
-    
-    const data =  await Usuario.findAll({where:{
-        id:  parseInt(id)
-    }})
-
     res.json({
         erro: false,
-       data
+        id,
+        nome: "André",
+        email: "Andremartfins746@gmail.com"
     })
 })
 
@@ -39,7 +45,10 @@ app.post('/user', async (req, res) => {
         console.log('cadastrou')
     })
     .catch(() => {
-        console.log("nao cadastrou")
+        return res.status(400).json({
+            erro:true,
+            mensagem:"Erro: Usuario não cadastrado!"
+           })
     })
     res.json({
         erro: false,
