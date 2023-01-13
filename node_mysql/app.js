@@ -28,7 +28,7 @@ app.get('/users', async (req, res) => {
 app.get('/user/:id', async(req, res) => {
     const {id} = req.params
     // await Usuario.findAll({where:{id: parseInt(id)}})
-    await Usuario
+    await Usuario.findByPk(parseInt(id))
     .then((user) => {
         res.json({
             erro: false,
