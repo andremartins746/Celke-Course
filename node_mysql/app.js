@@ -66,18 +66,44 @@ app.post('/user', async (req, res) => {
     })
 })
 
-app.put('/usuario', (req, res) => {
-    const {id ,nome, email} = req.body
-    res.json({
-        erro: false,
-        id,
-        nome,
-        email
+app.put('/user', async (req, res) => {
+    const {id ,name, email} = req.body
+
+    await Usuario.update(req.body, {where:{id}})
+    .then(() => {
+        return res.status(200).json({
+            erro:false,
+            mensagem:"Usuario editado com sucesso!"
+           })
     })
+    .catch(() => {
+        return res.status(400).json({
+            erro:true,
+            mensagem:"Erro: Usuario editado com sucesso!"
+           })
+    })
+
 })
 
-app.delete('/usuario/:id', (req, res) => {
+app.delete('/user/:id', async (req, res) => {
     const {id} = req.params
+    await Usuario.destroy({
+        where:{
+            id
+        }
+    })
+    .then(() => {
+        return res.json({
+            erro: false,
+            mensagem:"Usuario APAGADO com sucesso!"
+           })
+    })
+    .catch(() => {
+        return res.status(400).json({
+            erro:true,
+            mensagem:"Erro: Usuario NÂO APAGADO com sucesso!"
+           })
+    })
     res.json({
         erro: false,
         id,
