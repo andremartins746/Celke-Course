@@ -16,6 +16,6 @@ const Usuario = BD.define('users', {
         type: Sequelize.STRING
     }
 })
-Usuario.sync()
+Usuario.sync({alter: true })
 
 module.exports = Usuario;

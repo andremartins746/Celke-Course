@@ -8,7 +8,7 @@ app.use(express.json())
 app.get('/users', async (req, res) => {
     await Usuario.findAll({
         order:[['id', 'DESC']],    //DESC decrecente - ASC crecente - colocando em ordem decrecente (do ultimo ate o primeiro)
-        attributes: ['id', 'name', 'email']  // escolhendo quais colunas retornar do BD
+        attributes: ['id', 'name', 'email', 'password']  // escolhendo quais colunas retornar do BD
     })
         .then((users) => {
             res.json({
