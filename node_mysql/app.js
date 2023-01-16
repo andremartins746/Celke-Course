@@ -87,6 +87,28 @@ app.put('/user', async (req, res) => {
 
 })
 
+
+app.put('/user-senha', async (req, res) => {
+    const {id, password} = req.body
+
+   var senhacrypt =  await bcryptjs.hash(password, 8)
+
+    await Usuario.update({password: senhacrypt}, {where:{id}})
+    .then(() => {
+        return res.status(200).json({
+            erro:false,
+            mensagem:"Senha editado com sucesso!"
+           })
+    })
+    .catch(() => {
+        return res.status(400).json({
+            erro:true,
+            mensagem:"Erro: Senha editado com sucesso!"
+           })
+    })
+
+})
+
 app.delete('/user/:id', async (req, res) => {
     const {id} = req.params
     await Usuario.destroy({
