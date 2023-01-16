@@ -1,5 +1,6 @@
 const express = require("express")
 const Usuario = require("./models/Usuario")
+const bcryptjs = require("bcryptjs")
 
 const app = express()
 app.use(express.json())
@@ -46,11 +47,12 @@ app.get('/user/:id', async(req, res) => {
 })
 
 app.post('/user', async (req, res) => {
-    const {name, email} = req.body
-    await Usuario.create({
-        name:name,
-        email: email
-    })
+    var dados = req.body
+
+    //CRIPTOGRAFANDO A SENHA
+   dados.password = await bcryptjs.hash(dados.password, 8)
+
+    await Usuario.create(dados)
     .then(() => {
         console.log('cadastrou')
     })
