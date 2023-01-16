@@ -14,6 +14,9 @@ const Usuario = BD.define('users', {
     },
     email:{
         type: Sequelize.STRING
+    },
+    password:{
+        type: Sequelize.STRING
     }
 })
 Usuario.sync({alter: true })
