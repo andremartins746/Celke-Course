@@ -19,6 +19,7 @@ const Usuario = BD.define('users', {
         type: Sequelize.STRING
     }
 })
-Usuario.sync({alter: true })
+// VERIFICANDO SE OUVE ALGUMA ALTERAÇÃO NA TABELA
+//Usuario.sync({alter: true }) CRIANDO COLUNAS QUE NAO EXISTE NA TABELA
 
 module.exports = Usuario;
