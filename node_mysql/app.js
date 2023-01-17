@@ -126,7 +126,7 @@ app.delete('/user/:id', async (req, res) => {
         return res.status(400).json({
             erro:true,
             mensagem:"Erro: Usuario NÂO APAGADO com sucesso!"
-           })
+        })
     })
     res.json({
         erro: false,
@@ -135,10 +135,22 @@ app.delete('/user/:id', async (req, res) => {
     })
 })
 
-app.post("login", async (req, res) => {
-    const data = req.body
-    console.log( await data)
-    res.json({
+app.post("/login", async (req, res) => {
+    const user = await Usuario.findOne({where:{email:req.body.email}})
+    if(user === null) {
+        return res.status(400).json({
+            erro:true,
+            mensagem:"Erro: Usuario não encontrado!"
+        })
+    }
+
+    if(!(await bcryptjs.compare(req.body.password, user.password))) {
+        return res.status(400).json({
+            erro:true,
+            mensagem:"Erro: Senha invalida!"
+        })
+    }
+   return res.json({
         erro:false,
         mensagem:"Login realizado com sucesso!"
        })
