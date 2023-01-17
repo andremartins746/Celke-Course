@@ -18,7 +18,8 @@ app.get("/users", validarToken, async (req, res) => {
                 erro: false,
                 users
             });
-        }).catch(() => {
+        })
+        .catch(() => {
             return res.status(400).json({
                 erro: true,
                 mensagem: "Erro: Nenhum usuário encontrado!"
@@ -36,7 +37,8 @@ app.get("/user/:id", validarToken, async (req, res) => {
                 erro: false,
                 user: user
             });
-        }).catch(() => {
+        })
+        .catch(() => {
             return res.status(400).json({
                 erro: true,
                 mensagem: "Erro: Nenhum usuário encontrado!"
@@ -54,7 +56,8 @@ app.post("/user", validarToken, async (req, res) => {
                 erro: false,
                 mensagem: "Usuário cadastrado com sucesso!"
             });
-        }).catch(() => {
+        })
+        .catch(() => {
             return res.status(400).json({
                 erro: true,
                 mensagem: "Erro: Usuário não cadastrado com sucesso!"
@@ -72,7 +75,8 @@ app.put("/user", validarToken, async (req, res) => {
                 mensagem: "Usuário editado com sucesso!"
             });
 
-        }).catch(() => {
+        })
+        .catch(() => {
             return res.status(400).json({
                 erro: true,
                 mensagem: "Erro: Usuário não editado com sucesso!"
@@ -92,7 +96,8 @@ app.put("/user-senha", validarToken, async (req, res) => {
                 mensagem: "Senha editada com sucesso!"
             });
 
-        }).catch(() => {
+        })
+        .catch(() => {
             return res.status(400).json({
                 erro: true,
                 mensagem: "Erro: Senha não editada com sucesso!"
@@ -109,7 +114,8 @@ app.delete("/user/:id", validarToken, async (req, res) => {
                 erro: false,
                 mensagem: "Usuário apagado com sucesso!"
             });
-        }).catch(() => {
+        })
+        .catch(() => {
             return res.status(400).json({
                 erro: true,
                 mensagem: "Erro: Usuário não apagado com sucesso!"
