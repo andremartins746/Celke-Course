@@ -27,7 +27,7 @@ app.get('/users', async (req, res) => {
 
 })
 
-app.get('/user/:id', async(req, res) => {
+app.get('/user/:id', ValidarToken, async(req, res) => {
     const {id} = req.params
     // await Usuario.findAll({where:{id: parseInt(id)}})
     await Usuario.findByPk(parseInt(id))
@@ -159,5 +159,34 @@ app.post("/login", async (req, res) => {
         token
        })
 })
+
+async function ValidarToken(req, res, next) {
+    const autHeader = req.headers.authorization
+
+    const [bearer, token] = autHeader.split(' ')
+    if(!token){
+        return res.status(400).json({
+            erro:true,
+            mensagem:"Erro: necessario enviar o token!"
+        })
+    }
+
+    try{
+        
+
+    }
+    catch{
+        return res.status(400).json({
+            erro:true,
+            mensagem:"Erro: token invalido!"
+        })
+    }
+    return res.json({
+     mensagem: token,
+     
+    })
+    return autHeader
+    //return next()
+}
 
 app.listen(8080, () => console.log("rodando"))
