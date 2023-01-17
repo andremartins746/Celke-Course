@@ -2,7 +2,7 @@ const express = require("express")
 const bcryptjs = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const Usuario = require("./models/Usuario")
-
+const {promisify} = require("util")
 const app = express()
 app.use(express.json())
 
@@ -152,7 +152,7 @@ app.post("/login", async (req, res) => {
         })
     }
 
-   const token =  jwt.sign({id: user.id}, '60!97?n!bnykypKZsNkqNySdf', {expiresIn: '7d'})
+   const token =  jwt.sign({id: user.id}, 'chamapapai', {expiresIn: '7d'})
    return res.json({
         erro:false,
         mensagem:"Login realizado com sucesso!",
@@ -167,13 +167,14 @@ async function ValidarToken(req, res, next) {
     if(!token){
         return res.status(400).json({
             erro:true,
-            mensagem:"Erro: necessario enviar o token!"
+            mensagem:"Erro: necessario realizar o login!"
         })
     }
 
     try{
-        
-
+       const decoded = await promisify(jwt.verify(token, 'chamapapai'))
+        req.userId = decoded.id
+        return next()
     }
     catch{
         return res.status(400).json({
