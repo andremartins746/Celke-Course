@@ -1,193 +1,180 @@
-const express = require("express")
-const bcryptjs = require("bcryptjs")
-const jwt = require("jsonwebtoken")
-const Usuario = require("./models/Usuario")
-const {promisify} = require("util")
-const app = express()
-app.use(express.json())
+const express = require("express");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { promisify } = require('util');
+const User = require('./models/Usuario');
+const app = express();
 
+app.use(express.json());
 
-app.get('/users', async (req, res) => {
-    await Usuario.findAll({
-        order:[['id', 'DESC']],    //DESC decrecente - ASC crecente - colocando em ordem decrecente (do ultimo ate o primeiro)
-        attributes: ['id', 'name', 'email', 'password']  // escolhendo quais colunas retornar do BD
+app.get("/users", validarToken, async (req, res) => {
+
+    await User.findAll({
+        attributes: ['id', 'name', 'email', 'password'],
+        order: [['id', 'DESC']]
     })
         .then((users) => {
-            res.json({
+            return res.json({
                 erro: false,
                 users
-            })
-        })
-        .catch(() => {
-           return res.status(400).json({
-            erro:true,
-            mensagem:"Erro: Nenhum Usuario encontrado"
-           })
-        })
+            });
+        }).catch(() => {
+            return res.status(400).json({
+                erro: true,
+                mensagem: "Erro: Nenhum usuário encontrado!"
+            });
+        });
+});
 
-})
+app.get("/user/:id", validarToken, async (req, res) => {
+    const { id } = req.params;
 
-app.get('/user/:id', ValidarToken, async(req, res) => {
-    const {id} = req.params
-    // await Usuario.findAll({where:{id: parseInt(id)}})
-    await Usuario.findByPk(parseInt(id))
-    .then((user) => {
-        res.json({
-            erro: false,
-            user
-        })
-    })
-    .catch(() => {
-        return res.status(400).json({
-            erro:true,
-            mensagem:"Erro: Nenhum Usuario encontrado"
-           })
-    })
+    //await User.findAll({ where: { id: id } })
+    await User.findByPk(id)
+        .then((user) => {
+            return res.json({
+                erro: false,
+                user: user
+            });
+        }).catch(() => {
+            return res.status(400).json({
+                erro: true,
+                mensagem: "Erro: Nenhum usuário encontrado!"
+            });
+        });
+});
 
-   
-})
+app.post("/user", validarToken, async (req, res) => {
+    var dados = req.body;
+    dados.password = await bcrypt.hash(dados.password, 8);
 
-app.post('/user', async (req, res) => {
-    var dados = req.body
+    await User.create(dados)
+        .then(() => {
+            return res.json({
+                erro: false,
+                mensagem: "Usuário cadastrado com sucesso!"
+            });
+        }).catch(() => {
+            return res.status(400).json({
+                erro: true,
+                mensagem: "Erro: Usuário não cadastrado com sucesso!"
+            });
+        });
+});
 
-    //CRIPTOGRAFANDO A SENHA
-   dados.password = await bcryptjs.hash(dados.password, 8)
+app.put("/user", validarToken, async (req, res) => {
+    const { id } = req.body;
 
-    await Usuario.create(dados)
-    .then(() => {
-        console.log('cadastrou')
-    })
-    .catch(() => {
-        return res.status(400).json({
-            erro:true,
-            mensagem:"Erro: Usuario não cadastrado!"
-           })
-    })
-    res.json({
-        erro: false,
+    await User.update(req.body, { where: { id } })
+        .then(() => {
+            return res.json({
+                erro: false,
+                mensagem: "Usuário editado com sucesso!"
+            });
 
-    })
-})
+        }).catch(() => {
+            return res.status(400).json({
+                erro: true,
+                mensagem: "Erro: Usuário não editado com sucesso!"
+            });
+        });
+});
 
-app.put('/user', async (req, res) => {
-    const {id ,name, email} = req.body
+app.put("/user-senha", validarToken, async (req, res) => {
+    const { id, password } = req.body;
 
-    await Usuario.update(req.body, {where:{id}})
-    .then(() => {
-        return res.status(200).json({
-            erro:false,
-            mensagem:"Usuario editado com sucesso!"
-           })
-    })
-    .catch(() => {
-        return res.status(400).json({
-            erro:true,
-            mensagem:"Erro: Usuario editado com sucesso!"
-           })
-    })
+    var senhaCrypt = await bcrypt.hash(password, 8);
 
-})
+    await User.update({ password: senhaCrypt }, { where: { id } })
+        .then(() => {
+            return res.json({
+                erro: false,
+                mensagem: "Senha editada com sucesso!"
+            });
 
+        }).catch(() => {
+            return res.status(400).json({
+                erro: true,
+                mensagem: "Erro: Senha não editada com sucesso!"
+            });
+        });
+});
 
-app.put('/user-senha', async (req, res) => {
-    const {id, password} = req.body
+app.delete("/user/:id", validarToken, async (req, res) => {
+    const { id } = req.params;
 
-   var senhacrypt =  await bcryptjs.hash(password, 8)
+    await User.destroy({ where: { id } })
+        .then(() => {
+            return res.json({
+                erro: false,
+                mensagem: "Usuário apagado com sucesso!"
+            });
+        }).catch(() => {
+            return res.status(400).json({
+                erro: true,
+                mensagem: "Erro: Usuário não apagado com sucesso!"
+            });
+        });
+});
 
-    await Usuario.update({password: senhacrypt}, {where:{id}})
-    .then(() => {
-        return res.status(200).json({
-            erro:false,
-            mensagem:"Senha editado com sucesso!"
-           })
-    })
-    .catch(() => {
-        return res.status(400).json({
-            erro:true,
-            mensagem:"Erro: Senha editado com sucesso!"
-           })
-    })
-
-})
-
-app.delete('/user/:id', async (req, res) => {
-    const {id} = req.params
-    await Usuario.destroy({
-        where:{
-            id
+app.post('/login', async (req, res) => {
+    const user = await User.findOne({
+        attributes: ['id', 'name', 'email', 'password'],
+        where: {
+            email: req.body.email
         }
-    })
-    .then(() => {
-        return res.json({
-            erro: false,
-            mensagem:"Usuario APAGADO com sucesso!"
-           })
-    })
-    .catch(() => {
+    });
+    if (user === null) {
         return res.status(400).json({
-            erro:true,
-            mensagem:"Erro: Usuario NÂO APAGADO com sucesso!"
-        })
-    })
-    res.json({
-        erro: false,
-        id,
-       
-    })
-})
+            erro: true,
+            mensagem: "Erro: Usuário não encontrado!"
+        });
+    };
 
-app.post("/login", async (req, res) => {
-    const user = await Usuario.findOne({ attributes:["id", "name", "email", "password"], where:{email:req.body.email}})
-    if(user === null) {
+    if (!(await bcrypt.compare(req.body.password, user.password))) {
         return res.status(400).json({
-            erro:true,
-            mensagem:"Erro: Usuario não encontrado!"
-        })
-    }
+            erro: true,
+            mensagem: "Erro: Senha inválida!"
+        });
+    };
 
-    if(!(await bcryptjs.compare(req.body.password, user.password))) {
-        return res.status(400).json({
-            erro:true,
-            mensagem:"Erro: Senha invalida!"
-        })
-    }
+    var token = jwt.sign({ id: user.id }, 'tnX685!8!hN!haOrjRgngMxWh', {
+        //expiresIn: 600 // 10min
+        expiresIn: '7d', // 7 dia
+    });
 
-   const token =  jwt.sign({id: user.id}, 'chamapapai', {expiresIn: '7d'})
-   return res.json({
-        erro:false,
-        mensagem:"Login realizado com sucesso!",
-        token
-       })
-})
-
-async function ValidarToken(req, res, next) {
-    const autHeader = req.headers.authorization
-
-    const [bearer, token] = autHeader.split(' ')
-    if(!token){
-        return res.status(400).json({
-            erro:true,
-            mensagem:"Erro: necessario realizar o login!"
-        })
-    }
-
-    try{
-       const decoded = await promisify(jwt.verify(token, 'chamapapai'))
-        req.userId = decoded.id
-        return next()
-    }
-    catch{
-        return res.status(400).json({
-            erro:true,
-            mensagem:"Erro: token invalido!"
-        })
-    }
     return res.json({
-     mensagem: token,
-     
-    })
-    return autHeader
-    //return next()
-}
+        erro: false,
+        mensagem: "Login realizado com sucesso!",
+        token
+    });
+});
 
-app.listen(8080, () => console.log("rodando"))
+async function validarToken(req, res, next) {
+    //return res.json({messagem: "Validar token"});
+    const authHeader = req.headers.authorization;
+    const [bearer, token] = authHeader.split(' ');
+
+    if (!token) {
+        return res.status(400).json({
+            erro: true,
+            mensagem: "Erro: Necessário realizar o login para acessar a página!"
+        });
+    };
+
+    try {
+        const decoded = await promisify(jwt.verify)(token, 'tnX685!8!hN!haOrjRgngMxWh');
+        req.userId = decoded.id;
+
+        return next();
+    } catch (err) {
+        return res.status(401).json({
+            erro: true,
+            mensagem: "Erro: Necessário realizar o login para acessar a página!"
+        });
+    }
+};
+
+app.listen(8080, () => {
+    console.log("Servidor iniciado na porta 8080: http://localhost:8080");
+});
