@@ -1,6 +1,7 @@
 const express = require("express")
-const Usuario = require("./models/Usuario")
 const bcryptjs = require("bcryptjs")
+const jwt = require("jsonwebtoken")
+const Usuario = require("./models/Usuario")
 
 const app = express()
 app.use(express.json())
@@ -150,9 +151,12 @@ app.post("/login", async (req, res) => {
             mensagem:"Erro: Senha invalida!"
         })
     }
+
+   const token =  jwt.sign({id: user.id}, '60!97?n!bnykypKZsNkqNySdf', {expiresIn: '7d'})
    return res.json({
         erro:false,
-        mensagem:"Login realizado com sucesso!"
+        mensagem:"Login realizado com sucesso!",
+        token
        })
 })
 
