@@ -136,7 +136,7 @@ app.delete('/user/:id', async (req, res) => {
 })
 
 app.post("/login", async (req, res) => {
-    const user = await Usuario.findOne({where:{email:req.body.email}})
+    const user = await Usuario.findOne({ attributes:["id", "name", "email", "password"], where:{email:req.body.email}})
     if(user === null) {
         return res.status(400).json({
             erro:true,
