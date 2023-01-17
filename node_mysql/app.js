@@ -135,4 +135,13 @@ app.delete('/user/:id', async (req, res) => {
     })
 })
 
+app.post("login", async (req, res) => {
+    const data = req.body
+    console.log( await data)
+    res.json({
+        erro:false,
+        mensagem:"Login realizado com sucesso!"
+       })
+})
+
 app.listen(8080, () => console.log("rodando"))
