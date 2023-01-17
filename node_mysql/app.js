@@ -7,6 +7,7 @@ const app = express();
 
 app.use(express.json());
 
+// RETORNA TODOS OS USUARIOS.
 app.get("/users", validarToken, async (req, res) => {
 
     await User.findAll({
@@ -27,6 +28,7 @@ app.get("/users", validarToken, async (req, res) => {
         });
 });
 
+// RETORNA UM CERTOO USUARIO.
 app.get("/user/:id", validarToken, async (req, res) => {
     const { id } = req.params;
 
@@ -46,6 +48,7 @@ app.get("/user/:id", validarToken, async (req, res) => {
         });
 });
 
+// CADASTRA UM USUARIO.
 app.post("/user", validarToken, async (req, res) => {
     var dados = req.body;
     dados.password = await bcrypt.hash(dados.password, 8);
@@ -65,6 +68,7 @@ app.post("/user", validarToken, async (req, res) => {
         });
 });
 
+// EDITA UM USUARIO.
 app.put("/user", validarToken, async (req, res) => {
     const { id } = req.body;
 
@@ -84,6 +88,7 @@ app.put("/user", validarToken, async (req, res) => {
         });
 });
 
+// EDITA A SENHA DE UM USUARIO.
 app.put("/user-senha", validarToken, async (req, res) => {
     const { id, password } = req.body;
 
@@ -105,6 +110,7 @@ app.put("/user-senha", validarToken, async (req, res) => {
         });
 });
 
+// APAGA UM USUARIO.
 app.delete("/user/:id", validarToken, async (req, res) => {
     const { id } = req.params;
 
@@ -123,6 +129,7 @@ app.delete("/user/:id", validarToken, async (req, res) => {
         });
 });
 
+// BACKEND DO LOGIN DO USUARIO.
 app.post('/login', async (req, res) => {
     const user = await User.findOne({
         attributes: ['id', 'name', 'email', 'password'],
@@ -156,6 +163,7 @@ app.post('/login', async (req, res) => {
     });
 });
 
+// VALIDAÇÃO DO TOKEN DO USUARIO.
 async function validarToken(req, res, next) {
     //return res.json({messagem: "Validar token"});
     const authHeader = req.headers.authorization;
@@ -181,6 +189,7 @@ async function validarToken(req, res, next) {
     }
 };
 
+// INICIALIZANDO O SERVIDOR.
 app.listen(8080, () => {
     console.log("Servidor iniciado na porta 8080: http://localhost:8080");
 });
