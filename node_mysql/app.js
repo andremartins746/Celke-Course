@@ -77,7 +77,7 @@ app.post("/user", eAdmin, async (req, res) => {
         .catch(() => {
             return res.status(400).json({
                 erro: true,
-                mensagem: "Erro: Usuário não cadastrado com sucesso!"
+                mensagem: "Erro: Usuário não cadastrado!"
             });
         });
 });
