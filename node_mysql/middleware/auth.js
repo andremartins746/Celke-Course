@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken")
 const {promisify} = require("util")
+require("dotenv").config()
 
 
 module.exports = {
@@ -16,7 +17,7 @@ module.exports = {
         };
     
         try {
-            const decoded = await promisify(jwt.verify)(token, 'tnX685!8!hN!haOrjRgngMxWh');
+            const decoded = await promisify(jwt.verify)(token, process.env.SECRET);
             req.userId = decoded.id;
     
             return next();

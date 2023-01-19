@@ -3,6 +3,7 @@ const {eAdmin} = require("./middleware/auth")
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 // const { promisify } = require('util');
+require("dotenv").config()
 const User = require('./models/Usuario');
 const app = express();
 
@@ -152,7 +153,7 @@ app.post('/login', async (req, res) => {
         });
     };
 
-    var token = jwt.sign({ id: user.id }, 'tnX685!8!hN!haOrjRgngMxWh', {
+    var token = jwt.sign({ id: user.id }, process.env.SECRET, {
         //expiresIn: 600 // 10min
         expiresIn: '7d', // 7 dia
     });
