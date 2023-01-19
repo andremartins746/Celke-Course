@@ -203,6 +203,16 @@ app.post('/login', async (req, res) => {
 //     }
 // };
 
+
+app.get("/val-token", eAdmin , async (req, res) => {
+    return res.json({
+        erro: false,
+        mensagem: "Token valido!",
+        id: req.userId
+    });
+})
+
+
 // INICIALIZANDO O SERVIDOR.
 app.listen(8080, () => {
     console.log("Servidor iniciado na porta 8080: http://localhost:8080");
