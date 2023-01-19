@@ -1,14 +1,15 @@
 const express = require("express");
+const {eAdmin} = require("./middleware/auth")
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { promisify } = require('util');
+// const { promisify } = require('util');
 const User = require('./models/Usuario');
 const app = express();
 
 app.use(express.json());
 
 // RETORNA TODOS OS USUARIOS.
-app.get("/users", validarToken, async (req, res) => {
+app.get("/users", eAdmin, async (req, res) => {
 
     await User.findAll({
         attributes: ['id', 'name', 'email', 'password'],
@@ -29,7 +30,7 @@ app.get("/users", validarToken, async (req, res) => {
 });
 
 // RETORNA UM CERTOO USUARIO.
-app.get("/user/:id", validarToken, async (req, res) => {
+app.get("/user/:id", eAdmin, async (req, res) => {
     const { id } = req.params;
 
     //await User.findAll({ where: { id: id } })
@@ -49,7 +50,7 @@ app.get("/user/:id", validarToken, async (req, res) => {
 });
 
 // CADASTRA UM USUARIO.
-app.post("/user", validarToken, async (req, res) => {
+app.post("/user", eAdmin, async (req, res) => {
     var dados = req.body;
     dados.password = await bcrypt.hash(dados.password, 8);
 
@@ -69,7 +70,7 @@ app.post("/user", validarToken, async (req, res) => {
 });
 
 // EDITA UM USUARIO.
-app.put("/user", validarToken, async (req, res) => {
+app.put("/user", eAdmin, async (req, res) => {
     const { id } = req.body;
 
     await User.update(req.body, { where: { id } })
@@ -89,7 +90,7 @@ app.put("/user", validarToken, async (req, res) => {
 });
 
 // EDITA A SENHA DE UM USUARIO.
-app.put("/user-senha", validarToken, async (req, res) => {
+app.put("/user-senha", eAdmin, async (req, res) => {
     const { id, password } = req.body;
 
     var senhaCrypt = await bcrypt.hash(password, 8);
@@ -111,7 +112,7 @@ app.put("/user-senha", validarToken, async (req, res) => {
 });
 
 // APAGA UM USUARIO.
-app.delete("/user/:id", validarToken, async (req, res) => {
+app.delete("/user/:id", eAdmin, async (req, res) => {
     const { id } = req.params;
 
     await User.destroy({ where: { id } })
@@ -163,31 +164,31 @@ app.post('/login', async (req, res) => {
     });
 });
 
-// VALIDAÇÃO DO TOKEN DO USUARIO.
-async function validarToken(req, res, next) {
-    //return res.json({messagem: "Validar token"});
-    const authHeader = req.headers.authorization;
-    const [bearer, token] = authHeader.split(' ');
+// // VALIDAÇÃO DO TOKEN DO USUARIO.
+// async function eAdmin(req, res, next) {
+//     //return res.json({messagem: "Validar token"});
+//     const authHeader = await req.headers.authorization;
+//     const [bearer, token] = await authHeader.split(' ');
 
-    if (!token) {
-        return res.status(400).json({
-            erro: true,
-            mensagem: "Erro: Necessário realizar o login para acessar a página!"
-        });
-    };
+//     if (!token) {
+//         return res.status(400).json({
+//             erro: true,
+//             mensagem: "Erro: Necessário realizar o login para acessar a página!"
+//         });
+//     };
 
-    try {
-        const decoded = await promisify(jwt.verify)(token, 'tnX685!8!hN!haOrjRgngMxWh');
-        req.userId = decoded.id;
+//     try {
+//         const decoded = await promisify(jwt.verify)(token, 'tnX685!8!hN!haOrjRgngMxWh');
+//         req.userId = decoded.id;
 
-        return next();
-    } catch (err) {
-        return res.status(401).json({
-            erro: true,
-            mensagem: "Erro: Necessário realizar o login para acessar a página!"
-        });
-    }
-};
+//         return next();
+//     } catch (err) {
+//         return res.status(401).json({
+//             erro: true,
+//             mensagem: "Erro: Necessário realizar o login para acessar a página!"
+//         });
+//     }
+// };
 
 // INICIALIZANDO O SERVIDOR.
 app.listen(8080, () => {

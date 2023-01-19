@@ -1,5 +1,5 @@
-var jwt = require("jsonwebtoken")
-var {promisify} = require("util")
+const jwt = require("jsonwebtoken")
+const {promisify} = require("util")
 
 
 module.exports = {
