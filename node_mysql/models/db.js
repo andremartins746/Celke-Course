@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
-
-const sequelize = new Sequelize('celke', 'root','', {
-    host: 'localhost',
+require("dotenv").config()
+const sequelize = new Sequelize(process.env.DB, process.env.DB_USER, process.env.BD_PASS, {
+    host: process.env.DB_HOST,
     dialect: 'mysql'
 }) 
 
