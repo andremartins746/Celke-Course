@@ -218,7 +218,7 @@ app.get("/val-token", eAdmin , async (req, res) => {
 
     })
     .catch(() => {
-        return res.status(401).json({
+        return res.status(400).json({
             erro: true,
             mensagem: "Erro: Necessário realizar o login para acessar a página!"
         });
