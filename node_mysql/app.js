@@ -206,7 +206,7 @@ app.post('/login', async (req, res) => {
 
 
 app.get("/val-token", eAdmin , async (req, res) => {
-    await User.findByPk(req.userId)
+    await User.findByPk(req.userId, {attributes: ['id', 'name', 'email']})
     .then((user) => {
         return res.json({
             erro: false,
