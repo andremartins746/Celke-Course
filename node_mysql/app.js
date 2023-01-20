@@ -165,7 +165,7 @@ app.post('/login', async (req, res) => {
         });
     };
 
-    var token = jwt.sign({ id: user.id }, process.env.SECRET, {
+    var token = jwt.sign({ id: user.id, levelAcess: 1 }, process.env.SECRET, {
         //expiresIn: 600 // 10min
         expiresIn: '7d', // 7 dia
     });
@@ -208,6 +208,7 @@ app.get("/val-token", eAdmin , async (req, res) => {
     return res.json({
         erro: false,
         mensagem: "Token valido!",
+        level: req.levelAcess,
         id: req.userId
     });
 })
