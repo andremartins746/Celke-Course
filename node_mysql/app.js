@@ -6,7 +6,8 @@ const jwt = require('jsonwebtoken');
 require("dotenv").config()
 const User = require('./models/Usuario');
 const app = express();
-const cors = require("cors")
+const cors = require("cors");
+const Usuario = require("./models/Usuario");
 
 app.use(express.json());
 
@@ -205,12 +206,23 @@ app.post('/login', async (req, res) => {
 
 
 app.get("/val-token", eAdmin , async (req, res) => {
-    return res.json({
-        erro: false,
-        mensagem: "Token valido!",
-        level: req.levelAcess,
-        id: req.userId
-    });
+    await User.findByPk(req.userId)
+    .then((user) => {
+        return res.json({
+            erro: false,
+            // mensagem: "Token valido!",
+            // level: req.levelAcess,
+            // id: req.userId
+            user
+        });
+
+    })
+    .catch(() => {
+        return res.status(401).json({
+            erro: true,
+            mensagem: "Erro: Necessário realizar o login para acessar a página!"
+        });
+    })
 })
 
 
