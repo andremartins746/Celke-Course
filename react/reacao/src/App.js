@@ -1,27 +1,21 @@
 import "./App.css";
+import React from "react"
 
 function App(props) {
 
-  const Name = "André Martins Pereira"
-
-  const Usuario = {
-    idade: 20,
-    profissao: "Desenvolvedor de Software"
-  }
-
-  const FromatarNome = (Name) => {
-    return Name;
-  };
-
-  const formatarDadosUsuario = (usuario) => {
-    return " tem, "+ usuario.idade + " anos, profissão " + usuario.profissao
-  }
-
   return (
     <div>
-      <h1>Colaborador {FromatarNome(Name)} {formatarDadosUsuario(Usuario)}</h1>
+      <h1>Olá <Welcome name="André"></Welcome></h1>
     </div>
   );
+}
+
+function Welcome(props){
+  return (
+    <>
+        <span>{props.name}</span>
+    </>
+  )
 }
 
 export default App;
