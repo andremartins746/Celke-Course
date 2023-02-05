@@ -7,6 +7,7 @@ function App(props) {
   return (
     <div>
       <h1>site </h1>
+      <Header/>
     </div>
   );
 }
