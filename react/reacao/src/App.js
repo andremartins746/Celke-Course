@@ -10,12 +10,18 @@ function App(props) {
   );
 }
 
-function Welcome(props){
-  return (
-    <>
-        <span>{props.name}</span>
-    </>
-  )
-}
+// function Welcome(props){
+//   return (
+//     <>
+//         <span>{props.name}</span>
+//     </>
+//   )
+// }
 
+
+class Welcome extends React.Component{
+  render() {
+    return <span>{this.props.name}</span>
+  }
+}
 export default App;
