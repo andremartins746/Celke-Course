@@ -1,9 +1,16 @@
-import './App.css';
+import "./App.css";
 
-function App() {
+function App(props) {
+
+  const Name = "André Martins Pereira"
+
+  const FromatarNome = (Name) => {
+    return Name;
+  };
+
   return (
-    <div className="App">
-     <h1>salve galeraaa!!!</h1>
+    <div>
+      <h1>Olà. {FromatarNome(Name)}</h1>
     </div>
   );
 }
