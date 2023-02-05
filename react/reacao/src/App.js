@@ -1,6 +1,7 @@
 import "./App.css";
 import React from "react"
 import Header from "./components/Header/index"
+import Article from "./components/articles/index"
 
 function App(props) {
 
@@ -8,6 +9,7 @@ function App(props) {
     <div>
       <h1>site </h1>
       <Header/>
+      <Article></Article>
     </div>
   );
 }
