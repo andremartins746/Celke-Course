@@ -1,11 +1,12 @@
 import "./App.css";
 import React from "react"
+import Header from "../src/components/Header"
 
 function App(props) {
 
   return (
     <div>
-      <h1>Olá <Welcome name="André"></Welcome></h1>
+      <h1>site </h1>
     </div>
   );
 }
@@ -19,9 +20,9 @@ function App(props) {
 // }
 
 
-class Welcome extends React.Component{
-  render() {
-    return <span>{this.props.name}</span>
-  }
-}
+// class Welcome extends React.Component{
+//   render() {
+//     return <span>{this.props.name}</span>
+//   }
+// }
 export default App;
