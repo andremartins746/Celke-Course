@@ -4,6 +4,7 @@ import Header from "./components/Header/index"
 import Article from "./components/articles/index"
 import Menu from "./components/Menu/index"
 import Aside from "./components/Aside/index"
+import Footer from "./components/Footer";
 
 function App(props) {
 
@@ -14,6 +15,7 @@ function App(props) {
       <Article></Article>
       <Menu></Menu>
       <Aside></Aside>
+      <Footer></Footer>
     </div>
   );
 }
