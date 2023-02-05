@@ -3,6 +3,7 @@ import React from "react"
 import Header from "./components/Header/index"
 import Article from "./components/articles/index"
 import Menu from "./components/Menu/index"
+import Aside from "./components/Aside/index"
 
 function App(props) {
 
@@ -12,6 +13,7 @@ function App(props) {
       <Header/>
       <Article></Article>
       <Menu></Menu>
+      <Aside></Aside>
     </div>
   );
 }
