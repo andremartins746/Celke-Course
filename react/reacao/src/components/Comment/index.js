@@ -1,7 +1,13 @@
-import React from "react"
+import React, {useState, useEffect} from "react"
+
 
 
 function Avatar (props) {
+    const [dados, setDados] = useState([])
+    
+    useEffect(() => {
+
+    }, [])
     return (
         <>
             <img src={props.user} alt="autor"/> <br/> <hr></hr>
