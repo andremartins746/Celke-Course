@@ -1,14 +1,25 @@
 import "./App.css";
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 
 const App = () => {
+  const [produtoID, SetProdutoID] =  useState("3")
+  const [produtoNome, SetprodutoNome] = useState('')
 
+  const buscarProduto = () => {
+    console.log("procurar produdo")
+    SetProdutoID(4)
+    SetprodutoNome("curso react")
+  }
+  useEffect(() => {
+    buscarProduto()
+  },[produtoID])
 
-  const [nome, SetNome] = useState('')
   return(
     <>
-        <p>{nome}</p>
-        <button onClick={() => SetNome("andre")}>Alterar</button>
+        <p>Listar Produtos</p>
+
+        <p>{produtoNome}</p>
+      
     </>
   )
 }
