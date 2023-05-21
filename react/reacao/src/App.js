@@ -10,6 +10,8 @@ const App = () => {
     SetProdutoID(4)
     SetprodutoNome("curso react")
   }
+  useEffect(() => {})
+  
   useEffect(() => {
     buscarProduto()
   },[produtoID])
